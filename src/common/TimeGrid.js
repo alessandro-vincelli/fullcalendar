@@ -93,9 +93,9 @@ var TimeGrid = Grid.extend({
 
 			html +=
 				'<tr ' + (isLabeled ? '' : 'class="fc-minor"') + '>' +
-					(!isRTL ? axisHtml : '') +
+					(!isRTL && !this.view.isHideHours ? axisHtml : '') +
 					'<td class="' + view.widgetContentClass + '"/>' +
-					(isRTL ? axisHtml : '') +
+					(isRTL  ? axisHtml : '') +
 				"</tr>";
 
 			slotTime.add(this.slotDuration);

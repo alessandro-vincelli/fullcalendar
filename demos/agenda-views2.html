@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8' />
+<link href='../lib/bootstrap/dist/css/bootstrap.css' rel='stylesheet' />
+<link href='../lib/bootstrap/dist/css/bootstrap-theme.css' rel='stylesheet' />
+<link href='../dist/fullcalendar.css' rel='stylesheet' />
+<link href='../dist/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='../lib/moment/moment.js'></script>
+<script src='../lib/jquery/dist/jquery.js'></script>
+<script src='../dist/fullcalendar.js'></script>
+<script>
+var events1 = [
+              {
+  				title: 'Apertura Event',
+  				start: '2015-02-12T08:30:00',
+  				end: '2015-02-12T12:30:00',
+  				rendering: 'background'
+              },
+              {
+  				title: 'Apertura Event',
+  				start: '2015-02-12T15:30:00',
+  				end: '2015-02-12T21:30:00',
+  				risorsa: 'sala1',
+  				rendering: 'background'
+              },
+              {
+    				title: 'Meeting',
+    				start: '2015-02-12T10:30:00',
+    				end: '2015-02-12T12:30:00'
+    			}
+              ];
+
+var events = [
+              {
+  				title: 'Apertura Event',
+  				start: '2015-02-12T08:30:00',
+  				end: '2015-02-12T12:30:00',
+  				rendering: 'background'
+              },
+              {
+  				title: 'Apertura Event',
+  				start: '2015-02-12T15:30:00',
+  				end: '2015-02-12T21:30:00',
+  				risorsa: '2015-02-12T21:30:00',
+  				rendering: 'background'
+              },    	                
+  			{
+  				title: 'Long Event',
+  				start: '2015-02-07',
+  				end: '2015-02-10'
+  			},
+  			{
+  				id: 999,
+  				title: 'Repeating Event',
+  				start: '2015-02-09T16:00:00'
+  			},
+  			{
+  				id: 999,
+  				title: 'Repeating Event',
+  				start: '2015-02-16T16:00:00'
+  			},
+  			{
+  				title: 'Conference',
+  				start: '2015-02-11',
+  				end: '2015-02-13'
+  			},
+  			{
+  				title: 'Meeting',
+  				start: '2015-02-12T10:30:00',
+  				end: '2015-02-12T12:30:00'
+  			},
+  			{
+  				title: 'Lunch',
+  				start: '2015-02-12T12:00:00'
+  			},
+  			{
+  				title: 'Meeting',
+  				start: '2015-02-12T14:30:00'
+  			},
+  			{
+  				title: 'Happy Hour',
+  				start: '2015-02-12T17:30:00'
+  			},
+  			{
+  				title: 'Dinner',
+  				start: '2015-02-12T20:00:00'
+  			},
+  			{
+  				title: 'Birthday Party',
+  				start: '2015-02-13T07:00:00'
+  			},
+  			{
+  				title: 'Click for Google',
+  				url: 'http://google.com/',
+  				start: '2015-02-28'
+  			}
+  		];
+
+
+
+  
+
+    function buildCall(callId){
+    	
+		return $(callId).fullCalendar({
+			header: {
+				left: '',
+				center: '',
+				right: ''
+			},
+			handleWindowResize: false,
+			defaultView: 'agendah2oDay',
+			defaultDate: '2015-02-12',
+			resource: 'pippo',
+			allDaySlot: false,
+			isHideHours: true,
+			editable: true,
+			eventLimit: true, // allow "more" link when too many events
+			//events: events,
+			eventSources: [events],
+			aspectRatio: 2,
+			height: "auto",
+			minTime: "06:00:00",
+			maxTime: "22:00:00",
+			eventAfterRender: function(){
+				
+			}
+		});
+  		//$(callId + ' .fc-axis').hide();
+
+    }
+    
+  
+    
+	$(document).ready(function() {
+		buildOre("#calendar1");
+		buildCall("#calendar2");
+		
+		buildCall("#calendar3");
+		buildCall("#calendar4");
+		buildCall("#calendar5");
+		buildCall("#calendar6");
+		buildCall("#calendar7");
+		buildCall("#calendar8");
+		buildCall("#calendar9");
+		
+		
+		
+		$("#e1, #e2, #e3").change(function() {
+			//esempio di sostituzione dati	
+			//remove the old eventSources
+	        $('#calendar2').fullCalendar('removeEventSource', events);
+	        $('#calendar2').fullCalendar('removeEventSource', events1);
+	        //$('#eventFilterCalendar').fullCalendar('removeEventSource', curSource[1]);
+	        $('#calendar2').fullCalendar('refetchEvents');
+
+	        //attach the new eventSources
+	        $('#calendar2').fullCalendar('addEventSource', events1);
+	        //$('#eventFilterCalendar').fullCalendar('addEventSource', newSource[1]);
+	        $('#calendar2').fullCalendar('refetchEvents');
+	    });		
+		
+		//$("#calendar2").fullCalendar('refetchEvents');
+	});
+
+
+	
+	
+</script>
+<style>
+
+
+
+</style>
+</head>
+<body>
+
+<input id="e1" type="checkbox" name="e1" checked="checked">
+<div class="table-responsive">
+  <table class="table">
+    <tbody>
+    <tr>
+    <td width="62px"><div id='calendar1'></div></td>
+    <td><div id='calendar2'></div></td>
+    <td><div id='calendar3'></div></td>
+    <td><div id='calendar4'></div></td>
+    <td><div id='calendar5'></div></td>
+    <td><div id='calendar6'></div></td>
+    <td><div id='calendar7'></div></td>
+    <td><div id='calendar8'></div></td>
+    <td><div id='calendar9'></div></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- 
+<div class="row">
+  <div class="col-lg-1"><div id='calendar1'></div></div>
+  <div class="col-lg-1"><div id='calendar2'></div></div>
+  <div class="col-lg-1"><div id='calendar3'></div></div>
+</div> -->
+
+<div style="clear: both;"></div>
+</body>
+</html>
