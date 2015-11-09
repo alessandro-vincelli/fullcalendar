@@ -350,6 +350,12 @@ Grid.mixin({
 	// values for the event. Subclasses may override and set additional properties to be used by renderDrag.
 	// A falsy returned value indicates an invalid drop.
 	computeEventDrop: function(startCell, endCell, event) {
+		
+		console.log(startCell + "-" + endCell);
+		if(startCell == null || endCell == null){
+			return false;
+		}
+		
 		var calendar = this.view.calendar;
 		var dragStart = startCell.start;
 		var dragEnd = endCell.start;
