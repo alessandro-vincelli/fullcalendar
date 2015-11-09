@@ -103,6 +103,10 @@ var AgendaH2OView = View.extend({
 	// Builds the HTML skeleton for the view.
 	// The day-grid and time-grid components will render inside containers defined by this HTML.
 	renderHtml: function() {
+		//visualizzazione barra di progresso/occupazione giorno
+		var pgId = this.opt('resource.id');
+		var progressBar = '<div class="progress"><div id="pg-'+ pgId +'" class="progress-bar" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';
+		
 		return '' +
 			'<table>' +
 				'<thead class="fc-head">' +
@@ -112,7 +116,8 @@ var AgendaH2OView = View.extend({
 						'<table>' +
 							'<thead>' +
 								'<th class="fc-day-header ' + this.widgetHeaderClass + '">' +
-									this.opt('resource') +
+									this.opt('resource').name +
+									progressBar	 +
 								'</th>' +
 							'</thead>' +
 						'</table>' +
@@ -176,7 +181,14 @@ var AgendaH2OView = View.extend({
 
 	// Generates the HTML that goes before the bg of the TimeGrid slot area. Long vertical column.
 	slotBgIntroHtml: function() {
-		return '<td class="fc-axis ' + this.widgetContentClass + '" ' + this.axisStyleAttr() + '></td>';
+		//h2o: evita la creazione del TD dove td se ora e' nascosta
+		if(this.isHideHours){
+			return '';	
+		}
+		else{
+			return '<td class="fc-axis ' + this.widgetContentClass + '" ' + this.axisStyleAttr() + '></td>';
+		}
+		
 	},
 
 
@@ -184,7 +196,7 @@ var AgendaH2OView = View.extend({
 	// Affects content-skeleton, helper-skeleton, highlight-skeleton for both the time-grid and day-grid.
 	// Queried by the TimeGrid and DayGrid subcomponents when generating rows. Ordering depends on isRTL.
 	introHtml: function() {
-		//ALE: evito la creazione del TD dove td ora e' nascosta
+		//h2o: evita la creazione del TD dove td se ora e' nascosta
 		if(this.isHideHours){
 			return '';	
 		}
@@ -319,6 +331,8 @@ var AgendaH2OView = View.extend({
 
 		// the all-day area is flexible and might have a lot of events, so shift the height
 		this.updateHeight();
+		// Aggiorna la progress bar con il valore di completamento, il valore e' preso dalla property 'dayPercentageProgress'
+		$("#pg-" + this.opt('resource.id')).css("width", this.opt('dayPercentageProgress') + "%");
 	},
 
 
