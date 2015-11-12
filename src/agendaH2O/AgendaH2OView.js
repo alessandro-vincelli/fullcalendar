@@ -104,8 +104,11 @@ var AgendaH2OView = View.extend({
 	// The day-grid and time-grid components will render inside containers defined by this HTML.
 	renderHtml: function() {
 		//visualizzazione barra di progresso/occupazione giorno
-		var pgId = this.opt('resource.id');
-		var progressBar = '<div class="progress"><div id="pg-'+ pgId +'" class="progress-bar" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';
+		var progressBar = "";
+		if(this.opt('calendario') != undefined){
+			var pgId = this.opt('calendario').resource.id +"-"+ this.opt('calendario').dayOfWeek;
+			progressBar = '<div class="progress"><div id="pg-'+ pgId +'" class="progress-bar" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';			
+		}
 		
 		return '' +
 			'<table>' +

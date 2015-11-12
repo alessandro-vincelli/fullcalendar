@@ -9,6 +9,7 @@
 <script src='../lib/moment/moment.js'></script>
 <script src='../lib/jquery/dist/jquery.js'></script>
 <script src='../dist/fullcalendar.js'></script>
+<script src='../lib/jquery-ui/jquery-ui.js'></script>
 <script>
 var events1 = [
               {
@@ -36,7 +37,7 @@ var events = [
   				title: 'Apertura Event',
   				start: '2015-02-12T08:30:00',
   				end: '2015-02-12T12:30:00',
-  				rendering: 'background'
+  				rendering: 'background'  				
               },
               {
   				title: 'Apertura Event',
@@ -68,7 +69,8 @@ var events = [
   			{
   				title: 'Meeting',
   				start: '2015-02-12T10:30:00',
-  				end: '2015-02-12T12:30:00'
+  				end: '2015-02-12T12:30:00',
+  	  				id: '12345567890'
   			},
   			{
   				title: 'Lunch',
@@ -103,6 +105,13 @@ var events = [
 
     function buildCall(callId){
     	
+		var risorsa = new Object();
+		risorsa.id = "00001";
+		var cal = new Object();
+		cal.resource = risorsa;
+		cal.dayOfWeek = 0;
+    	
+    	
 		return $(callId).fullCalendar({
 			header: {
 				left: '',
@@ -113,9 +122,11 @@ var events = [
 			defaultView: 'agendah2oDay',
 			defaultDate: '2015-02-12',
 			resource: 'pippo',
+			calendario: cal,
 			allDaySlot: false,
 			isHideHours: true,
 			editable: true,
+			droppable: true,
 			eventLimit: true, // allow "more" link when too many events
 			//events: events,
 			eventSources: [events],
@@ -123,10 +134,36 @@ var events = [
 			height: "auto",
 			minTime: "06:00:00",
 			maxTime: "22:00:00",
-			eventAfterRender: function(){
-				
-			}
+			dropAccept: "*",
+			eventDrop: function( event, delta, revertFunc, jsEvent, ui, view ) {
+				console.log("ed " + event);
+			}, 
+			eventReceive: function( event ) { 
+				console.log("er " + event);
+				//event.stick = false;
+			},
+			
+			
+			
+			
+			drop: function(date, jsEvent, ui, view ) {
+				console.log("d " + view.opt("resource"));
+			},
+			eventRender: function(event, element) {
+				console.log(event + " evento.id - " + event.id + "-" + element );
+		        element.attr("id", event.id);
+		    },
+		    eventAfterRender: function( event, element, view ) { 
+		    	element.draggable({
+					zIndex: 999,
+					revert: true,      // will cause the event to go back to its
+					revertDuration: 0  //  original position after the drag
+				});		    	
+		    }
+		    
 		});
+		
+		
   		//$(callId + ' .fc-axis').hide();
 
     }
@@ -134,7 +171,7 @@ var events = [
   
     
 	$(document).ready(function() {
-		buildOre("#calendar1");
+		//buildOre("#calendar1");
 		buildCall("#calendar2");
 		
 		buildCall("#calendar3");

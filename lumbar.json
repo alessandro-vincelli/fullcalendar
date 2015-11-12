@@ -45,6 +45,9 @@
         "src/agenda/config.js",
         "src/agendaH2O/AgendaH2OView.js",
         "src/agendaH2O/config.js",
+        "src/basicH2O/BasicH2OView.js",
+        "src/basicH2O/MonthH2OView.js",
+        "src/basicH2O/config.js",
         "src/outro.js"
       ],
       "styles": [
@@ -52,7 +55,8 @@
         "src/main.css",
         "src/basic/basic.css",
         "src/agenda/agenda.css",
-        "src/agendaH2O/agenda.css"
+        "src/agendaH2O/agenda.css",
+        "src/basicH2O/basic.css"
       ]
     },
     "fullcalendar.print": {
