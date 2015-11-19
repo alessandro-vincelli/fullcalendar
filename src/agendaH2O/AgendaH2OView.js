@@ -118,7 +118,7 @@ var AgendaH2OView = View.extend({
 						'<div class="fc-row ' + this.widgetHeaderClass + '">' +
 						'<table>' +
 							'<thead>' +
-								'<th class="fc-day-header ' + this.widgetHeaderClass + '">' +
+								'<th resourceid="' + this.opt('resource').id +'" class="fc-day-header ' + this.widgetHeaderClass + '">' +
 									this.opt('resource').name +
 									progressBar	 +
 								'</th>' +
