@@ -414,5 +414,9 @@ function computeSlotSegCollisions(seg, otherSegs, results) {
 
 // Do these segments occupy the same vertical space?
 function isSlotSegCollision(seg1, seg2) {
+	//per eventi tipo UP, evita che gli eventi di questo tipo entrino nel conteggio per la dimensione degli eventi 
+	if((seg1.event.leftBackEvent || seg2.event.leftBackEvent)){
+		return false;
+	}
 	return seg1.bottom > seg2.top && seg1.top < seg2.bottom;
 }
