@@ -77,5 +77,5 @@
 .fc-view, /* scope positioning and z-index's for everything within the view */
 .fc-view > table { /* so dragged elements can be above the view's main element */
 	position: relative;
-	z-index: 1;
+	/*z-index: 1; Alessandro, rimosso: fix per sovrapposizoione su pulsante "more", ed evita che l'evento draggato vada sotto il calendario*/
 }
