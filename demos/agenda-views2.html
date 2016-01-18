@@ -107,6 +107,8 @@ var events = [
     	
 		var risorsa = new Object();
 		risorsa.id = "00001";
+		risorsa.name = "SALA 00001";
+		risorsa.BOCOLOR = "#66FF33";
 		var cal = new Object();
 		cal.resource = risorsa;
 		cal.dayOfWeek = 0;
@@ -121,7 +123,9 @@ var events = [
 			handleWindowResize: false,
 			defaultView: 'agendah2oDay',
 			defaultDate: '2015-02-12',
-			resource: 'pippo',
+			resource: risorsa,
+			resourceDesc: "risorsa",
+			dayPercentageProgress: 30,
 			calendario: cal,
 			allDaySlot: false,
 			isHideHours: true,
@@ -150,7 +154,7 @@ var events = [
 				console.log("d " + view.opt("resource"));
 			},
 			eventRender: function(event, element) {
-				console.log(event + " evento.id - " + event.id + "-" + element );
+				//console.log(event + " evento.id - " + event.id + "-" + element );
 		        element.attr("id", event.id);
 		    },
 		    eventAfterRender: function( event, element, view ) { 
@@ -174,13 +178,13 @@ var events = [
 		//buildOre("#calendar1");
 		buildCall("#calendar2");
 		
-		buildCall("#calendar3");
-		buildCall("#calendar4");
-		buildCall("#calendar5");
-		buildCall("#calendar6");
-		buildCall("#calendar7");
-		buildCall("#calendar8");
-		buildCall("#calendar9");
+		//buildCall("#calendar3");
+		//buildCall("#calendar4");
+		//buildCall("#calendar5");
+		//buildCall("#calendar6");
+		//buildCall("#calendar7");
+		//buildCall("#calendar8");
+		//buildCall("#calendar9");
 		
 		
 		

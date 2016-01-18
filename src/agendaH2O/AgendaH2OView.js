@@ -1,4 +1,3 @@
-
 /* An abstract class for all agenda-related views. Displays one more columns with time slots running vertically.
 ----------------------------------------------------------------------------------------------------------------------*/
 // Is a manager for the TimeGrid subcomponent and possibly the DayGrid subcomponent (if allDaySlot is on).
@@ -107,7 +106,9 @@ var AgendaH2OView = View.extend({
 		var progressBar = "";
 		if(this.opt('calendario') != undefined){
 			var pgId = this.opt('calendario').resource.id +"-"+ this.opt('calendario').dayOfWeek;
-			progressBar = '<div class="progress"><div id="pg-'+ pgId +'" class="progress-bar" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';			
+			//progressBar = '<md-progress-linear style="cursor: pointer;" day-of-week="' + this.opt('calendario').dayOfWeek + '" id="pg-'+ pgId +'" class="md-warn" md-mode="buffer" value="35" md-buffer-value="100"></md-progress-linear>';
+			progressBar = '<div day-of-week="' + this.opt('calendario').dayOfWeek + '" style="cursor: pointer;" h2o-calendar-progressbar id="pg-parent-'+ pgId +'" resourceid="' + this.opt('resource').id +'"><div id="pg-'+ pgId +'"></div></div>';
+			//progressBar = '<div style="cursor: pointer;" h2o-calendar-progressbar id="pg-parent-'+ pgId +'" class="progress"><div id="pg-'+ pgId +'" class="progress-bar progress-bar-success" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';			
 		}
 		
 		return '' +
@@ -118,8 +119,8 @@ var AgendaH2OView = View.extend({
 						'<div class="fc-row ' + this.widgetHeaderClass + '">' +
 						'<table>' +
 							'<thead>' +
-								'<th resourceid="' + this.opt('resource').id +'" class="fc-day-header ' + this.widgetHeaderClass + '">' +
-									this.opt('resource').name +
+								'<th h2o-cal-title style="background-color: ' + this.opt('resource').BOCOLOR + ';" resourceid="' + this.opt('resource').id +'" class="fc-day-header ' + this.widgetHeaderClass + '">' +
+									this.opt('resourceDesc') +
 									progressBar	 +
 								'</th>' +
 							'</thead>' +
@@ -334,8 +335,6 @@ var AgendaH2OView = View.extend({
 
 		// the all-day area is flexible and might have a lot of events, so shift the height
 		this.updateHeight();
-		// Aggiorna la progress bar con il valore di completamento, il valore e' preso dalla property 'dayPercentageProgress'
-		$("#pg-" + this.opt('resource.id')).css("width", this.opt('dayPercentageProgress') + "%");
 	},
 
 

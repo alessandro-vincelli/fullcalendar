@@ -17,8 +17,12 @@
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			defaultView: 'agendaDay',
 			defaultDate: '2015-02-12',
 			editable: true,
+			 //eventAfterRender: function(event, element, view) {
+               //  $(element).css('width','50px');
+               //},
 			eventLimit: true, // allow "more" link when too many events
 			events: [
 				{
@@ -43,16 +47,18 @@
 				{
 					title: 'Conference',
 					start: '2015-02-11',
-					end: '2015-02-13'
+					end: '2015-02-13',
+					
 				},
 				{
 					title: 'Meeting',
 					start: '2015-02-12T10:30:00',
-					end: '2015-02-12T12:30:00'
+					end: '2015-02-12T12:30:00',
+					leftBackEvent: 'true'
 				},
 				{
 					title: 'Lunch',
-					start: '2015-02-12T12:00:00'
+					start: '2015-02-12T12:00:00',
 				},
 				{
 					title: 'Meeting',

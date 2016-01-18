@@ -16,6 +16,7 @@ var BasicH2OView = View.extend({
 	headRowEl: null, // the fake row element of the day-of-week header
 
 
+	
 	initialize: function() {
 		this.dayGrid = new DayGrid(this);
 		this.coordMap = this.dayGrid.coordMap; // the view's date-to-cell mapping is identical to the subcomponent's
@@ -88,12 +89,13 @@ var BasicH2OView = View.extend({
 	renderHtml: function() {
 		//visualizzazione barra di progresso/occupazione giorno
 		var pgId = this.opt('calendario').resource.id +"-"+ this.opt('calendario').dayOfWeek;
-		var progressBar = '<div class="progress"><div id="pg-'+ pgId +'" class="progress-bar" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';
+		//var progressBar = '<div title="vista giornaliera" style="cursor: pointer;" class="progress"><div id="pg-'+ pgId +'" class="progress-bar progress-bar-success" title="'+ 0 + '% completo" role="progressbar" aria-valuenow="' + 0 + '" aria-valuemin="0" aria-valuemax="100"> <span class="sr-only">'+ 0 + '% completo</span> </div></div>';
+		var progressBar = '<div day-of-week="' + this.opt('calendario').dayOfWeek + '" style="cursor: pointer;" h2o-calendar-progressbar id="pg-parent-'+ pgId +'" resourceid="' + this.opt('resource').id +'"><div id="pg-'+ pgId +'"></div></div>';
 		return '' +
 			'<table>' +
 				'<thead class="fc-head">' +
 					'<tr>' +
-						'<td class="' + this.widgetHeaderClass + '">' +
+						'<td class="' + this.widgetHeaderClass + '" style="cursor: pointer;" dayclick="'+ this.opt('calendario').resource.id +"-"+ this.opt('calendario').dayOfWeek + '">' +
 							this.dayGrid.headHtml() + // render the day-of-week headers
 							progressBar +
 						'</td>' +

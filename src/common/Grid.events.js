@@ -351,7 +351,6 @@ Grid.mixin({
 	// A falsy returned value indicates an invalid drop.
 	computeEventDrop: function(startCell, endCell, event) {
 		
-		console.log(startCell + "-" + endCell);
 		if(startCell == null || endCell == null){
 			return false;
 		}
